@@ -18,6 +18,7 @@ for R1 in *_R1_*
 do
 	
 	# Set working directory
+	##### comment ##### we can change this so it finds the path without the need to type it here
 	
 	cd
 	cd Desktop/testing
@@ -32,17 +33,26 @@ do
 	R2=${R1//R1_001.fastq.gz/R2_001.fastq.gz}
 	
 	# Join & extract lane 1 - CHANGE PRIMERS ACCORDING TO PROJECT
-
+	##### comment ##### we can make -p and -q input arguments
+	
 	echo "Joining $base lane 1..."
 	
 	echo "Joining $base lane 1..."
 	pandaseq -f $R1 -r $R2 -F \
 	-p CTACGAATTC -q CTGCAGTGAA \
-	-w $base.joined.fastq -t 0.6 -T 14 -l 1 -C completely_miss_the_point:0
+	-w $base.joined.fastq -t 0.6 -T 14 -l 1 -C
 
 	# Convert to fasta
 
-	fq2fa $base.joined.fastq $base.joined.fasta
+	awk '
+    	NR%4 == 1 {print ">" substr($0, 2)}
+    	NR%4 == 2 {print}
+	' $base.joined.fastq > $base.joined.fasta
+	
+	# Remove seqs <500nt
+
+	awk 'BEGIN {RS = ">" ; ORS = ""} length($2) <= 500 {print ">"$0}' \
+	$base.joined.fasta > $base.trimmed.fasta
 
 	# make directory for analyses
 	
@@ -54,12 +64,13 @@ do
 	
 	mv $base.joined.fastq $dir/$base.joined.fastq
 	mv $base.joined.fasta $dir/$base.joined.fasta
-	#mv $base.trimmed.fasta $dir/$base.trimmed.fasta
+	mv $base.trimmed.fasta $dir/$base.trimmed.fasta
 
 	# Generate nt length distributions
 	
 	echo "Generating $base nt length distribution..."
 	readlength.sh in=$dir/$base.joined.fasta out=$dir/$base.joined.nt.histo bin=1
+	readlength.sh in=$dir/$base.trimmed.fasta out=$dir/$base.trimmed.nt.histo bin=1
 	
 	cd $dir
 	
@@ -67,6 +78,7 @@ do
 	
 	cat $base.joined.fastq >> $base2.joined.fastq
 	cat $base.joined.fasta >> $base2.joined.fasta
+	cat $base.trimmed.fasta >> $base2.trimmed.fasta
 
 done
 
