@@ -69,7 +69,8 @@ fi
 if [ -z "$outopt" ];
         then
                 outdir=$hdir/pipeline.output
-                echo "No output directory supplied. New output directory is: $outdir"
+                mkdir $outdir
+		echo "No output directory supplied. New output directory is: $outdir"
         else
                 # define output variable with correct path name
                 mkdir $outopt
