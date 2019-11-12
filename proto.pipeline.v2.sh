@@ -51,8 +51,6 @@ done
 
 # argument report
 # check arguments, print, exit if necessary w/ message
-
-
 if [ -z $helpm ];
 	then
 		echo "Parsing arguments now. Welcome to the pipeline!"
@@ -110,10 +108,21 @@ if [ -z $threads ];
 		echo "# of threads = $threads"
 fi
 
+# Make sure input directory contains fastqs before proceeding
+cd $fastqs
+if [[ -z "$(ls -1 *.fastq* 2>/dev/null | grep fastq)" ]] ;
+then
+	echo "ERROR: Input directory does not contain fastq files."
+	exit 1
+else
+	echo "Input filecheck passed."
+fi
+
+
 # move to working directory
 # make output directories
 cd $outdir
-mkdir counts joined.reads fastqs fastas histos
+mkdir counts joined.reads fastqs fastas histos 2>/dev/null
 
 # loop through reads & process them
 for R1 in $fastqs/*R1*
@@ -170,7 +179,7 @@ do
 
 	# Generate nt length distributions
 	echo "Generating $lbase nt length distribution..."
-	readlength.sh in=$fadir/$lbase.joined.fasta out=$lhist/$lbase.joined.nt.histo bin=1
+	readlength.sh in=$fadir/$lbase.joined.fasta out=$lhist/$lbase.joined.nt.histo bin=1 2>/dev/null
 	
 done
 
@@ -189,7 +198,7 @@ do
 
         # Generate nt length distribution for all lanes combined
 	echo "Generating $base nt length distribution..."
-	readlength.sh in=$base.joined.fasta out=$base.nt.histo bin=1
+	readlength.sh in=$base.joined.fasta out=$base.nt.histo bin=1 2>/dev/null
 
 	# NT SEQ COUNTS
         # convert fasta to tab delimmed file
@@ -224,16 +233,21 @@ do
 	mv $base.nt.histo $outdir/histos/$base.nt.histo
 	rm $base.nt.counts
 	
-	if [ -z $slanes ];
-        	then
-			echo "Cleaning up $base individual lane outputs..."
-                        cd ..
-                        rm -r $base	
-		else
-			echo "Individual lane outputs will be retained."
-	fi
-
         )
 done
+
+# cleanup indiv lanes
+
+if [ -z $slanes ];
+	then
+		echo "Cleaning up $base individual lane outputs..."
+                cd $outdir
+		pwd
+		ls
+                rm -r joined.reads/
+        else
+               	echo "Individual lane outputs will be retained."
+fi
+
 
 
