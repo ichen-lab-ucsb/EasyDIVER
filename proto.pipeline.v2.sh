@@ -53,7 +53,9 @@ done
 # check arguments, print, exit if necessary w/ message
 if [ -z $helpm ];
 	then
-		echo "Parsing arguments now. Welcome to the pipeline!"
+		printf "%`tput cols`s"|tr ' ' '#'
+		echo "-----Welcome to the Unnamed Chen Lab Pipeline!-----"
+		echo "--------You passed the following arguemnts---------"
 fi
 
 if [ -z "$inopt" ];
@@ -67,45 +69,45 @@ if [ -z "$inopt" ];
                 # define input variable with correct path name
                 cd $inopt
                 fastqs=$(pwd)
-                echo "Input directory path: $fastqs"
+                echo "-----Input directory path: $fastqs"
 fi
 
 if [ -z "$outopt" ];
         then
                 outdir=$hdir/pipeline.output
                 mkdir $outdir
-		echo "No output directory supplied. New output directory is: $outdir"
+		echo "-----No output directory supplied. New output directory is: $outdir"
         else
                 # define output variable with correct path name
                 mkdir $outopt 2>/dev/null
 		cd $outopt
                 outdir=$(pwd)
-                echo "Output directory path: $outdir"
+                echo "-----Output directory path: $outdir"
 fi
 
 if [ -z $fwd ];
         then
-                echo "WARNING: No forward primer supplied - extraction will be skipped."
+                echo "-----WARNING: No forward primer supplied - extraction will be skipped."
 fi
 
 if [ -z $rev ];
         then
-                echo "WARNING: No reverse primer supplied - extraction will be skipped."
+                echo "-----WARNING: No reverse primer supplied - extraction will be skipped."
 fi
 
 if [ -z $slanes ];
         then
-                echo "Individual lane outputs will be suppressed."
+                echo "-----Individual lane outputs will be suppressed."
         else
-                echo "Individual lane outputs will be retained."
+                echo "-----Individual lane outputs will be retained."
 fi
 
 if [ -z $threads ];
 	then
-		echo "# of threads undefined; proceeding with 1 thread, this could take a while..."
+		echo "-----# of threads undefined; proceeding with 1 thread, this could take a while..."
 		threads=1
 	else
-		echo "# of threads = $threads"
+		echo "-----# of threads = $threads"
 fi
 
 # Make sure input directory contains fastqs before proceeding
@@ -171,16 +173,21 @@ do
 	fi
 	
 	# Convert to fasta	
+	echo "Converting joined $lbase FASTQ to FASTA..."
 	sed '/^@/!d;s//>/;N' $fqdir/$lbase.joined.fastq > $fadir/$lbase.joined.fasta
 	
 	# Combine sequences from each lane into single files
+	echo "Adding $lbase reads to total $sbase reads..."
 	cat $fqdir/$lbase.joined.fastq >> $dir/$sbase.joined.fastq
         cat $fadir/$lbase.joined.fasta >> $dir/$sbase.joined.fasta
 
-	# Generate nt length distributions
-	echo "Generating $lbase nt length distribution..."
-	readlength.sh in=$fadir/$lbase.joined.fasta out=$lhist/$lbase.joined.nt.histo bin=1 2>/dev/null
-	
+	# Generate indiv lane  nt length distributions
+	if [ -z $slanes ];
+        	then :
+		else
+		echo "Generating $lbase nt length distribution..."
+		readlength.sh in=$fadir/$lbase.joined.fasta out=$lhist/$lbase.joined.nt.histo bin=1 2>/dev/null
+	fi
 done
 
 
@@ -194,7 +201,7 @@ do
         echo $d
         # define variables
         base=$(basename ${d})
-        (cd $d ; echo "In ${PWD}" ;
+        (cd $d ;
 
         # Generate nt length distribution for all lanes combined
 	echo "Generating $base nt length distribution..."
@@ -214,18 +221,19 @@ do
         # remove temps
         rm $base.seqs.only $base.fasta.tab
 		
-		# calculate unique and total
-		unique=$(awk 'END {print NR}' $base.nt.counts)
-		total=$(awk '{s+=$1}END{print s}' $base.nt.counts)
+	# calculate unique and total
+	echo "Calculating unique & total reads for $base..."
+	unique=$(awk 'END {print NR}' $base.nt.counts)
+	total=$(awk '{s+=$1}END{print s}' $base.nt.counts)
 
-		echo "number of unique sequences = $unique" 
-		echo "total number of molecules = $total"  
+	echo "number of unique sequences = $unique" 
+	echo "total number of molecules = $total"  
 		
-		# collect unique, total and sequences with counts in the counts file
-		echo "number of unique sequences = $unique" >> $outdir/counts/$base\_counts.txt
-		echo "total number of molecules = $total"   >> $outdir/counts/$base\_counts.txt
-		echo  >>  $outdir/counts/$base\_counts.txt
-		awk '{ print $2, $1 }' $base.nt.counts | column -t  >>  $outdir/counts/$base\_counts.txt
+	# collect unique, total and sequences with counts in the counts file
+	echo "number of unique sequences = $unique" >> $outdir/counts/$base\_counts.txt
+	echo "total number of molecules = $total"   >> $outdir/counts/$base\_counts.txt
+	echo  >>  $outdir/counts/$base\_counts.txt
+	awk '{ print $2, $1 }' $base.nt.counts | column -t  >>  $outdir/counts/$base\_counts.txt
 
 	# redirect outputs
 	mv $base.joined.fasta $outdir/fastas/$base.joined.fasta
@@ -242,8 +250,6 @@ if [ -z $slanes ];
 	then
 		echo "Cleaning up $base individual lane outputs..."
                 cd $outdir
-		pwd
-		ls
                 rm -r joined.reads/
         else
                	echo "Individual lane outputs will be retained."
