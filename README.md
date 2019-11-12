@@ -20,7 +20,7 @@ If any of these requirements are not met, the script will not perform as intende
 # Outputs
 If an output directory is not provided to the script, it will automatically make one in the same directory where the script was called.  
 By default, the script will suppress outputs from individual lanes.   
-Instead, it will combine the reads from each lane, for each sample, and redirect the outputs to the following sub-directories:  
+Instead, for each sample, it will combine the reads from every lane, and redirect the outputs to the following sub-directories:  
 
 `fastqs` will contain the joined fastq files  
 `fastas` will contain the joined fasta files  
