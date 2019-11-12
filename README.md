@@ -28,16 +28,17 @@ Instead, it will combine the reads from each lane, for each sample, and redirect
 If you wish to retain the individual lane outputs, use the -r flag
 
 # Usage
-`bash proto.pipeline.v2.sh -i [-o -p -q -r -T -h]
+`bash proto.pipeline.v2.sh -i [-o -p -q -r -T -h]`
 
-where: 
-        REQUIRED
-        -i input directory filepath
+where:
+
+    REQUIRED
+     -i input directory filepath
         
-        OPTIONAL
-        -o output directory filepath
-        -p forward primer sequence for extraction
-        -q reverse primer sequence for extraction
-        -r retain individual lane outputs
-        -T # of threads
-        -h prints this friendly message`
+    OPTIONAL
+     -o output directory filepath
+     -p forward primer sequence for extraction
+     -q reverse primer sequence for extraction
+     -r retain individual lane outputs
+     -T # of threads
+     -h prints this friendly message
