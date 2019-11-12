@@ -7,7 +7,7 @@ This is the README document for the Chen Lab's in-house pipeline for processing 
 3. Collect sequence length distributions (histos)
 4. Generate counts files for the Chen Lab clustering scripts.
 
-# INPUT REQUIREMENTS
+# Input requirements
 All inputs must:
 1. Be in the same directory (even reads from separate lanes).
 2. Be in FASTQ format.
@@ -15,7 +15,7 @@ All inputs must:
 4. User either the .fastq or .fastq.gz extensions.
 If any of these requirements are not met, the script will not perform as intended, or more likely, outright fail.
  
-# OUTPUTS
+# Outputs
 If an output directory is not provided to the script, it will automatically make one in the same directory where the script was called.
 By default, the script will suppress outputs from individual lanes. 
 Instead, it will combine the reads from each lane, for each sample, and redirect the outputs to the following sub-directories:
@@ -25,9 +25,10 @@ Instead, it will combine the reads from each lane, for each sample, and redirect
 'histos' will contain the nt length distributions
 If you wish to retain the individual lane outputs, use the -r flag
 
-# USAGE
+# Usage
 bash proto.pipeline.v2.sh -i [-o -p -q -r -T -h]
 where:
+        
         REQUIRED
         -i input directory filepath
         
