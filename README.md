@@ -1,15 +1,16 @@
 # read-processing-pipeline
 This is the README document for the Chen Lab's in-house pipeline for processing HTS reads from selection experiments.
 
-# This pipeline will take paired-end, demultiplexed Illumina read files and:
+# What exactly does it do?
+This pipeline will take raw, paired-end, demultiplexed Illumina read files and:
 1. Join them with PANDASeq.
 2. Extract the insert sequence based on user-supplied primer sequences.
-3. Collect sequence length distributions (histos)
+3. Collect sequence length distributions (histos).
 4. Generate counts files for the Chen Lab clustering scripts.
 
 # Input requirements
 All inputs must:
-1. Be in the same directory (even reads from separate lanes).
+1. Be in *one* directory (even reads from separate lanes).
 2. Be in FASTQ format.
 3. Use the standard Illumina naming scheme: `sample-name_S#_L00#_R#_001.fastq`
 4. User either the `.fastq` or `.fastq.gz` extensions.
@@ -25,7 +26,7 @@ Instead, it will combine the reads from each lane, for each sample, and redirect
 `counts` will contain all counts files for every sample
 `histos` will contain the nt length distributions
 
-If you wish to retain the individual lane outputs, use the -r flag
+If you wish to retain the individual lane outputs, use the `-r` flag
 
 # Usage
 `bash proto.pipeline.v2.sh -i [-o -p -q -r -T -h]`
