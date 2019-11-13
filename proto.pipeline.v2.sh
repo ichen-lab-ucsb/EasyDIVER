@@ -88,11 +88,15 @@ fi
 if [ -z $fwd ];
         then
                 echo "-----WARNING: No forward primer supplied - extraction will be skipped."
+	else
+		echo "-----Forward Primer: $fwd"
 fi
 
 if [ -z $rev ];
         then
                 echo "-----WARNING: No reverse primer supplied - extraction will be skipped."
+	else
+		echo "-----Reverse Primer: $rev"
 fi
 
 if [ -z $slanes ];
