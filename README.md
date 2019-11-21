@@ -29,8 +29,10 @@ Instead, for each sample, it will combine the reads from every lane, and redirec
 
 If you wish to retain the individual lane outputs, use the `-r` flag
 
+Version v3 also prints out a log file with the parameters used and the number of sequences in the fastq and counts files.
+
 # Usage
-`bash proto.pipeline.v2.sh -i [-o -p -q -r -T -h]`
+`bash proto.pipeline.v3.sh -i [-o -p -q -r -T -h]`
 
 where:
 
