@@ -290,13 +290,9 @@ for R1 in *R1*
 do
 
         basename=$(basename ${R1})
-        #lbase=${basename//_R*}
+        lbase=${basename//_R*}
         sbase=${basename//_L00*}
         R2=${R1//R1_001.fastq*/R2_001.fastq*}
-        
-        echo $sbase
-        echo $R1 $(gzcat $R1 | awk 'END {print NR/4}')
-        echo $R2 $(gzcat $R2 | awk 'END {print NR/4}') 
         
         echo $sbase \
         $(gzcat $R1 | awk 'END {print NR/4}') \
@@ -307,5 +303,10 @@ do
 					
 done
 
-awk '{ printf "%s %.2f\n", $0, 100*$5/$2 }' $outdir/log_temp.txt | column -t >> $outdir/log.txt
+awk '{seenR1[$1]+=$2; seenR2[$1]+=$3; unique[$1]=$4; total[$1]=$5}END{for (i in seenR1) print i, seenR1[i], seenR2[i], unique[i], total[i]}'  $outdir/log_temp.txt | column -t >> $outdir/log_temp2.txt
+
+
+awk '{ printf "%s %.2f\n", $0, 100*$5/$2 }' $outdir/log_temp2.txt | column -t >> $outdir/log.txt
+
 rm $outdir/log_temp.txt
+rm $outdir/log_temp2.txt
