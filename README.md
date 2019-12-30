@@ -7,6 +7,10 @@ This pipeline will take raw, paired-end, demultiplexed Illumina read files and:
 2. Extract the insert sequence based on user-supplied primer sequences.
 3. Collect sequence length distributions (histos).
 4. Generate counts files for the Chen Lab clustering scripts.
+5. Create a log file (v3, v4)
+6. Optional translation into amino acids (v4)
+7. Create a summary figure of log file (v4)
+
 
 # Input requirements
 All inputs must:
@@ -31,8 +35,10 @@ If you wish to retain the individual lane outputs, use the `-r` flag
 
 Version v3 also prints out a log file with the parameters used and the number of sequences in the fastq and counts files.
 
-# Usage
-`bash proto.pipeline.v3.sh -i [-o -p -q -r -T -h]`
+Version v4 also allows to translate sequences to amino acids using the genetic code and generates a summary figure based on the log file.
+
+# Usage versions v1, v2 and v3
+`bash proto.pipeline.vX.sh -i [-o -p -q -r -T -h]`
 
 where:
 
@@ -46,3 +52,22 @@ where:
      -r retain individual lane outputs
      -T # of threads
      -h prints this friendly message
+     
+# Usage version v4
+`bash proto.pipeline.v4.sh -i [-o -p -q -r -T -h -a]`
+
+where:
+
+    REQUIRED
+     -i input directory filepath
+        
+    OPTIONAL
+     -o output directory filepath
+     -p forward primer sequence for extraction
+     -q reverse primer sequence for extraction
+     -r retain individual lane outputs
+     -T # of threads
+     -h prints this friendly message
+     -a translate to amino acids
+
+     
