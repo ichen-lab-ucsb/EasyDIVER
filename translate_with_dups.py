@@ -1,6 +1,5 @@
-#import translator
+from __future__ import print_function
 import sys
-import time
 
 #genetic code
 gencode = {
@@ -35,15 +34,12 @@ def translate_dna_single(dna, frame=1):
         	break
         else:
         	amino_acids = amino_acids + translate_codon(codon)
-    return amino_acids
+    return amino_acids   
 
-#to print how long it takes at the end
-start_time = time.time()     
-
- #input file name
+#input file name
 f_name_in= sys.argv[1]    
-#output file name
 
+#output file name
 f_name_out=  f_name_in.split(".")[0] + "_aa_dup.txt"
 f_out=open(f_name_out, 'w') 
 
@@ -80,19 +76,12 @@ for i in range (0, len(list)):
 	unique += 1
 		
 #Print header in the output file
-print >> f_out, str(head[0].split("=")[0]).ljust(30), "=" , str(unique).rjust(10)
-print >> f_out, str(head[1].split("=")[0]).ljust(30), "=" , str(tot).rjust(10)
-print >>f_out, ""
-print ""
+print(str(head[0].split("=")[0]).ljust(30)+ "=" +str(unique).rjust(10), file=f_out)
+print(str(head[1].split("=")[0]).ljust(30)+ "=" +str(tot).rjust(10), file=f_out)
+print("", file=f_out)
 
 #Print lines in file
 for i in range (0, len(list)):
-	print >> f_out,  str(list[i]['seq']).ljust(100),  str(list[i]['abd']).rjust(20)
-
-print "total aa: ", tot     #this number should match the one in the counts file
-print "unique aa: ", unique     #this number should match the one in the counts file
+	print (str(list[i]['seq']).ljust(100) +  str(list[i]['abd']).rjust(20), file=f_out)
 
 f_out.close()
-
-#Print translateion time in terminal
-#print "Traslation_ic took", time.time() - start_time, "to run"
