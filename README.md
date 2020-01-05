@@ -37,6 +37,8 @@ Version v3 also prints out a log file with the parameters used and the number of
 
 Version v4 also allows to translate sequences to amino acids using the genetic code and generates a summary figure based on the log file.
 
+Version v6 allows for: both extraction primers, just one, or none. It also allows the ue of additional PANDASeq internal flags (e.g. L -50). This implies the user can change the values for the couple flagas for which weusing deafult values (-l 1 and -d rbfkms)
+
 # Usage versions v1, v2 and v3
 `bash proto.pipeline.vX.sh -i [-o -p -q -r -T -h]`
 
@@ -69,5 +71,23 @@ where:
      -T # of threads
      -h prints this friendly message
      -a translate to amino acids
+     
+# Usage version v6
+`bash proto.pipeline.v6.sh -i [-o -p -q -r -T -h -a -e]`
+
+where:
+
+    REQUIRED
+     -i input directory filepath
+        
+    OPTIONAL
+     -o output directory filepath
+     -p forward primer sequence for extraction
+     -q reverse primer sequence for extraction
+     -r retain individual lane outputs
+     -T # of threads
+     -h prints this friendly message
+     -a translate to amino acids
+    	-e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
 
      
