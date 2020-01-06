@@ -14,7 +14,7 @@ This pipeline will take raw, paired-end, demultiplexed Illumina read files and:
 # Dependencies and Installation
 The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a Linux subsystem and should be able to run the script.
 
-To use the pipeline, first install the two dependencies: python and PANDASeq. We recommend using the Anaconda distribution of python, and adding the Bioconda channel to Anaconda's package manager, conda. We defer to their documentation for installation. After installing Anaconda with Bioconda, PANDASeq is easily installed using conda with:
+To use the pipeline, first install the two dependencies: [Python](https://www.python.org/downloads/) and [PANDASeq](https://github.com/neufeld/pandaseq/wiki/Installation). We recommend using the Anaconda distribution of python, and adding the Bioconda channel to Anaconda's package manager, conda. See the [Anaconda documentation](https://docs.anaconda.com/anaconda/install/) for installation. After installing Anaconda with Bioconda, PANDASeq is easily installed using conda with:
 
 `conda install pandaseq`
 
