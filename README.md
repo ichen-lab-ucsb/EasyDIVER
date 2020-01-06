@@ -26,12 +26,12 @@ This pipeline takes raw, paired-end, demultiplexed Illumina read files and:
 1. Joins them with [PANDASeq](https://storage.googleapis.com/pandaseq/pandaseq.html).
 2. Extracts the insert sequence based on (optionally) user-supplied primer sequences.
 3. Collects sequence length distributions (histos).
-4. Generates counts files ~for the Chen Lab clustering scripts~.
+4. Generates counts files.
 5. Creates a log file
 6. Optionally translates into amino acids
 
 # Dependencies and Installation
-The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a [Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/faq). ~and should be able to run the script.~
+The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a [Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/faq).
 
 To use the pipeline, first install the two dependencies: [Python](https://www.python.org/downloads/) and [PANDASeq](https://github.com/neufeld/pandaseq/wiki/Installation). We recommend using the Anaconda distribution of python, and adding the Bioconda channel to Anaconda's package manager, conda. See the [Anaconda documentation](https://docs.anaconda.com/anaconda/install/) for installation. After installing Anaconda with [Bioconda](https://bioconda.github.io/), PANDASeq is easily installed using conda with:
 
