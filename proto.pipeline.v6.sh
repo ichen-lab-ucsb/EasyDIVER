@@ -108,7 +108,7 @@ fi
 
 if [ -z "$outopt" ];
         then
-			outdir=$hdir/pipeline.output
+			outdir=$fastqs/pipeline.output
 			mkdir $outdir
 		echo "-----No output directory supplied. New output directory is: $outdir"
         else
@@ -373,7 +373,7 @@ if [ -z $prot ];
 	
 	# Translat into aa
 	echo "Translating ${file//_counts.txt} nt to aa..."
-	python ../../../translate_with_dups.py $file 
+	python /usr/local/bin/translate_with_dups.py $file 
 	#Print in new file every line except the first 3 (2 with the number of molecules and sequences and town empty lines):
 	tail -n +4 ${file//_counts.txt}'_counts_aa_dup.txt' | sort > newfile.txt;
 	#Remove duplicates and sum abundances:
