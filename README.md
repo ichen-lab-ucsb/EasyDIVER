@@ -34,16 +34,15 @@ All inputs must:
 If any of these requirements are not met, the script will not perform as intended, or more likely, outright fail.
  
 # Outputs
-If an output directory is not provided to the script, it will automatically make one in the same directory as the inputs.  
-By default, the script will suppress outputs from individual lanes.   
-Instead, for each sample, it will combine the reads from every lane, and redirect the outputs to the following sub-directories:  
+If an output directory is not provided using the flag -o, a directory called `pipeline.output` will automatically be created in the same directory as the inputs.  
+For each sample, the pipeline will combine the reads from every lane, and redirect the outputs to the following sub-directories:  
 
 `fastqs` will contain the joined fastq files  
 `fastas` will contain the joined fasta files  
 `counts` will contain all counts files for every sample  
 `histos` will contain the nt length distributions  
 
-If you wish to retain the individual lane outputs, use the `-r` flag
+By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `joined.reads`.
 
 Version v3 also prints out a log file with the parameters used and the number of sequences in the fastq and counts files.
 
