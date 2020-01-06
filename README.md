@@ -19,7 +19,7 @@ where:
      -a translate to amino acids
     	-e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
  
-The flag -e allows the use of additional PANDASeq internal flags (e.g. L -50). This implies the user can provide values for two flagas for which deafult values are used otherwise (-l 1 and -d rbfkms).
+The flag `-e` allows the use of additional PANDASeq internal flags (e.g. L -50). Unless otherwise specified, the pipeline uses by default the internal PANDASeq flags and values `-l 1` and `-d rbfkms`. These can be changed using the flag `-e`.
 
 # What exactly does it do?
 This pipeline takes raw, paired-end, demultiplexed Illumina read files and:
@@ -53,7 +53,7 @@ All input files must:
 If any of these requirements are not met, the script will not perform as intended, or more likely, outright fail.
  
 # Output files
-All output files are redirected to the output directoy name and location provided by the flag -o. If an output directory is not provided, a default output directory called `pipeline.output` is automatically created in the same directory as the inputs.  
+All output files are redirected to the output directoy name and location provided by the flag `-o`. If an output directory is not provided, a default output directory called `pipeline.output` is automatically created in the same directory as the inputs.  
 For each sample, the pipeline combines the reads from every lane, and redirects the outputs to the following sub-directories:  
 `fastqs` will contain the joined fastq files  
 `fastas` will contain the joined fasta files  
@@ -62,7 +62,7 @@ For each sample, the pipeline combines the reads from every lane, and redirects 
 
 By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `joined.reads`.
 
-If translation to amino acids is derided (indicated by the use of the flag -a), the counts files are translated using the standard genetic code.
+If translation to amino acids is derided (indicated by the use of the flag `-a`), the counts files are translated using the standard genetic code.
 
 A single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
      
