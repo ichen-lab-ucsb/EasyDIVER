@@ -11,6 +11,18 @@ This pipeline will take raw, paired-end, demultiplexed Illumina read files and:
 6. Optional translation into amino acids (v4)
 7. Create a summary figure of log file (v4)
 
+# Dependencies and Installation
+The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a Linux subsystem and should be able to run the script.
+
+To use the pipeline, first install the two dependencies: python and PANDASeq. We recommend using the Anaconda distribution of python, and adding the Bioconda channel to Anaconda's package manager, conda. We defer to their documentation for installation. After installing Anaconda with Bioconda, PANDASeq is easily installed using conda with:
+
+`conda install pandaseq`
+
+In order for the pipeline to be called reliably, and for the pipeline to call the translator reliably, both scripts must be placed in `/usr/local/bin/` upon download. For example, these files can be placed in that directory with:
+
+`cp /path/to/pipeline.sh /path/to/translator.py /usr/local/bin/` 
+
+The pipeline will not be able to find the translator if it is not stored in `bin/`.
 
 # Input requirements
 All inputs must:
@@ -22,7 +34,7 @@ All inputs must:
 If any of these requirements are not met, the script will not perform as intended, or more likely, outright fail.
  
 # Outputs
-If an output directory is not provided to the script, it will automatically make one in the same directory where the script was called.  
+If an output directory is not provided to the script, it will automatically make one in the same directory as the inputs.  
 By default, the script will suppress outputs from individual lanes.   
 Instead, for each sample, it will combine the reads from every lane, and redirect the outputs to the following sub-directories:  
 
