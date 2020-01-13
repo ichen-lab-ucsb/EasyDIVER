@@ -22,7 +22,7 @@
 #bash ../proto.pipeline.v6.sh -i ./ -o ./output_CB -p CTACGAATTC -q CTGCAGTGAA -T 14 -a -e "-C completely_miss_the_point:0"
 
 
-usage="USAGE: bash proto.pipeline.v4.sh -i [-o -p -q -r -T -h -a -e]
+usage="USAGE: bash proto.pipeline.v6.sh -i [-o -p -q -r -T -h -a -e]
 where:
 	REQUIRED
 	-i input directory filepath
