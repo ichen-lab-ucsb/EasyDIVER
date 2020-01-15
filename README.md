@@ -2,7 +2,7 @@
 This is the README document for the Chen Lab's in-house pipeline for processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
 # Usage version v6
-`bash proto.pipeline.v6.sh -i [-o -p -q -r -T -h -a -e]`
+`bash proto.pipeline.v8.sh -i [-o -p -q -r -T -h -a -e]`
 
 where:
 
