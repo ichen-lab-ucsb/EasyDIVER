@@ -1,8 +1,8 @@
 # read-processing-pipeline
 This is the README document for the Chen Lab's in-house pipeline for processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
-# Usage version v6
-`bash proto.pipeline.v8.sh -i [-o -p -q -r -T -h -a -e]`
+# Usage version v9
+`bash proto.pipeline.v9.sh -i [-o -p -q -r -T -h -a -e]`
 
 where:
 
@@ -37,11 +37,11 @@ To use the pipeline, first install the two dependencies: [Python](https://www.py
 
 `conda install pandaseq`
 
-In order for the pipeline to be called reliably, and for the pipeline to call the translator reliably, both scripts must be placed in `/usr/local/bin/` upon download. For example, these files can be placed in that directory with:
+In order for the pipeline to be called from any directory and for the pipeline to call the translator reliably, both scripts must be placed in `/usr/local/bin/` upon download. For example, these files can be placed in that directory with:
 
 `cp /path/to/pipeline.sh /path/to/translator.py /usr/local/bin/` 
 
-The pipeline will not be able to find the translator if it is not stored in `bin/`.
+The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. 
 
 # Input requirements
 All input files must:
@@ -62,7 +62,7 @@ For each sample, the pipeline combines the reads from every lane, and redirects 
 
 By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `joined.reads`.
 
-If translation to amino acids is derided (indicated by the use of the flag `-a`), the counts files are translated using the standard genetic code.
+If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and count files and length distributions are created for the amino acid sequences as well. 
 
-A single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
+For the record, and to monitor the sucess of the run, a single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
      
