@@ -4,7 +4,7 @@
 # read-processing-pipeline
 This is the README document for the EasyDIVERS pipeline for processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
-# Usage version v9
+# Usage
 `bash easydiver.sh -i [-o -p -q -r -T -h -a -e]`
 
 where:
@@ -68,4 +68,9 @@ By default, the script will suppress outputs from individual lanes. If you wish 
 If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and count files and length distributions are created for the amino acid sequences as well. 
 
 For the record, and to monitor the sucess of the run, a single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
+
+ 
+# Test dataset
+
+A test dataset is provided. The test data corresponds to two samples obtained from a real experiment of in vitro evolution of mRNA displayed peptides. 
      
