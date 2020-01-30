@@ -2,10 +2,10 @@
 
 
 # read-processing-pipeline
-This is the README document for the Chen Lab's in-house pipeline for processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
+This is the README document for the EasyDIVERS pipeline for processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
 # Usage version v9
-`bash proto.pipeline.v9.sh -i [-o -p -q -r -T -h -a -e]`
+`bash easydiver.sh -i [-o -p -q -r -T -h -a -e]`
 
 where:
 
@@ -20,7 +20,7 @@ where:
      -T # of threads
      -h prints this friendly message
      -a translate to amino acids
-    	-e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
+     -e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
  
 The flag `-e` allows the use of additional PANDASeq internal flags (e.g. L -50). Unless otherwise specified, the pipeline uses by default the internal PANDASeq flags and values `-l 1` and `-d rbfkms`. These can be changed using the flag `-e`.
 
@@ -28,10 +28,10 @@ The flag `-e` allows the use of additional PANDASeq internal flags (e.g. L -50).
 This pipeline takes raw, paired-end, demultiplexed Illumina read files and:
 1. Joins them with [PANDASeq](https://storage.googleapis.com/pandaseq/pandaseq.html).
 2. Extracts the insert sequence based on (optionally) user-supplied primer sequences.
-3. Collects sequence length distributions (histos).
+3. Optionally translates into amino acids.
 4. Generates counts files.
-5. Creates a log file
-6. Optionally translates into amino acids
+5. Collects sequence length distributions (histos).
+6. Creates a log file.
 
 # Dependencies and Installation
 The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a [Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/faq).
