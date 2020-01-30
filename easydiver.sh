@@ -9,6 +9,8 @@
 	# pandaseq
 	# python
 
+
+
 usage="USAGE: bash easydiver.sh -i [-o -p -q -r -T -h -a -e]
 where:
 	REQUIRED
@@ -24,7 +26,10 @@ where:
 	-a translate to amino acids
 	-e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
 
-#test to verify pandaseq is installed and can be found
+# Record start time in seconds to calculate run time at the end
+start=`date +%s`
+
+# Test to verify pandaseq is installed and can be found
 pandatest=$(which pandaseq)
 
 if [ -z "$pandatest" ];
@@ -34,10 +39,10 @@ if [ -z "$pandatest" ];
 		exit 1
 fi
 
-# set home directory
+# Set home directory
 hdir=$(pwd)
 
-# parse arguments and set global variables
+# Parse arguments and set global variables
 while getopts hi:o:p:q:T:e:ra option
 do
 case "${option}"
@@ -60,8 +65,8 @@ a) prot="TRUE";;
 esac
 done
 
-# argument report
-# check arguments, print, exit if necessary w/ message
+# Argument report
+# Check arguments, print, exit if necessary w/ message
 if [ -z $helpm ];
 	then
 		
@@ -242,7 +247,7 @@ do
 	mkdir $ldir $lhist $fadir $fqdir $cdir 2>/dev/null
 	
 	# Join reads & extract insert
-	echo "Joining $lbase reads & extracting insert..."
+	echo "Joining $lbase reads & extracting primer..."
 	pandaseq -f $R1 -r $R2 -F \
 	$pval $qval \
 	-w $fqdir/$lbase.joined.fastq $tval -T $threads $extra $lval $dval 2>/dev/null
@@ -484,4 +489,9 @@ if [ -z $prot ];
 
 fi
 
+# Record end time in seconds to calculate run time at the end
+end=`date +%s`
 
+# Calculate run time
+runtime=$((end-start))
+echo "Run time:" $runtime
