@@ -63,7 +63,7 @@ For each sample, the pipeline combines the reads from every lane, and redirects 
 `counts` will contain all counts files for every sample  
 `histos` will contain the nt length distributions  
 
-By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `joined.reads`.
+By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `individual.lanes`.
 
 If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and count files and length distributions are created for the amino acid sequences as well. 
 
