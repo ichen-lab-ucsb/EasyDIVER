@@ -9,8 +9,6 @@
 	# pandaseq
 	# python
 
-
-
 usage="USAGE: bash easydiver.sh -i [-o -p -q -r -T -h -a -e]
 where:
 	REQUIRED
@@ -20,11 +18,12 @@ where:
 	-o output directory filepath
 	-p forward primer sequence for extraction
 	-q reverse primer sequence for extraction
+	-a translate to amino acids
 	-r retain individual lane outputs
 	-T # of threads
-	-h prints this friendly message
-	-a translate to amino acids
-	-e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
+	-e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")
+	-h prints this friendly message"
+
 
 # Record start time in seconds to calculate run time at the end
 start=`date +%s`
@@ -65,8 +64,6 @@ a) prot="TRUE";;
 esac
 done
 
-# Argument report
-# Check arguments, print, exit if necessary w/ message
 if [ -z $helpm ];
 	then
 		
@@ -92,6 +89,9 @@ if [ -z $helpm ];
 fi
 
 echo ""
+
+# Argument report
+# Check arguments, print, exit if necessary w/ message
 
 if [ -z "$inopt" ];
         then
@@ -221,7 +221,7 @@ fi
 # move to working directory
 # make output directories
 cd $outdir
-mkdir counts joined.reads fastqs fastas histos 2>/dev/null
+mkdir counts individual.lanes fastqs fastas histos 2>/dev/null
 
 # loop through reads & process them
 for R1 in $fastqs/*R1*
@@ -235,16 +235,15 @@ do
 
 	# Make a 'sample' directory for all analyses
 	# and combined lane outputs (aka 'sample' outputs)
-	dir=$outdir/joined.reads/$sbase
+	dir=$outdir/individual.lanes/$sbase
 	mkdir $dir 2>/dev/null
 
 	 # Make a directory for indiv lane read & histo outputs
-	ldir=$dir/indiv.lanes
-	lhist=$ldir/histos
-	fadir=$ldir/fastas
-	fqdir=$ldir/fastqs
-	cdir=$ldir/counts        
-	mkdir $ldir $lhist $fadir $fqdir $cdir 2>/dev/null
+	lhist=$dir/histos
+	fadir=$dir/fastas
+	fqdir=$dir/fastqs
+	cdir=$dir/counts        
+	mkdir $lhist $fadir $fqdir $cdir 2>/dev/null
 	
 	# Join reads & extract insert
 	echo "Joining $lbase reads & extracting primer..."
@@ -292,9 +291,9 @@ do
 	fi
 done
 
-cd $outdir/joined.reads
+cd $outdir/individual.lanes
 
-#################################################### COUNT FILE FOR NT
+########## CREATE COUNTS FILE FOR DNA ##########
 
 # Loop through directories and generate count files
 
@@ -330,12 +329,13 @@ echo ""
 if [ -z $slanes ];
 	then
 		echo "Cleaning up all individual lane outputs..."
-                rm -r $outdir/joined.reads/
+                rm -r $outdir/individual.lanes/
         else
                	echo "Individual lane outputs will be retained"
 fi
 
-#################################################### CREATE HISTO FILE FOR DNA
+
+########## CREATE HISTO FILE FOR DNA ##########
 
 cd $outdir/counts
 
@@ -356,7 +356,8 @@ do
 	
 	mv ${file//_counts.txt}'_counts_histo.txt' ../histos/${file//_counts.txt}'_counts_histo.txt'
 	
-#################################################### TRANSLATE INTO AA
+
+########## TRANSLATE DNA INTO PEPTIDES ##########
 
 if [ -z $prot ];
 	then
@@ -392,7 +393,8 @@ if [ -z $prot ];
 	# Remove every temp file:
 	rm newfile.txt; rm newfile2.txt; rm newfile3.txt; rm newfile4.txt; rm newfile5.txt
 
-#################################################### CREATE HISTO FILE FOR PEPTIDES
+
+########## CREATE HISTO FILE FOR PEPTIDES ##########
 
 	# Generate peptide length distribution for all lanes combined
 	echo "Generating ${file//_counts.txt} aa length distribution..."
@@ -421,7 +423,8 @@ if [ -z $prot ];
 		mv counts/*aa_histo.txt histos/
 fi
 
-#################################################### CREATE LOG FILE FOR DNA
+
+########## CREATE LOG FILE FOR DNA ##########
 
 if [ -z $prot ];
 
@@ -455,7 +458,8 @@ if [ -z $prot ];
 
 	else
 
-#################################################### CREATE LOG FILE FOR NT AND AA
+
+########## CREATE LOG FILE FOR DNA AND PEPTIDE SEQUENCES ##########
 
 		cd ..
 
@@ -494,4 +498,5 @@ end=`date +%s`
 
 # Calculate run time
 runtime=$((end-start))
+echo ""
 echo "Run time:" $runtime
