@@ -1,7 +1,7 @@
 ![EasyDIVER Logo](logo.png)
 
 
-# EasyDIVER pipeline for HTS data pre-processing
+# EasyDIVER
 This is the README document for the EasyDIVERS pipeline for pre-processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
 # Usage
