@@ -47,9 +47,10 @@ In order for the pipeline to be called from any directory and for the pipeline t
 To install EasyDIVER, execute from the local directory where it's stored (the first command makes it executable, the second comman installs EasyDIVER):
 
 `chmod +x easydiver.sh`
+
 `sudo install easydiver.sh`
 
-The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. bash easydiver -i [-o -p -q -r -T -h -a -e]). 
+The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. `bash easydiver -i [-o -p -q -r -T -h -a -e]`). 
 
 # Input requirements
 All input files must:
