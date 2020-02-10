@@ -24,6 +24,8 @@ where:
 
 The flag `-e` allows the use of additional PANDASeq internal flags (e.g. L -50). Unless otherwise specified, the pipeline uses by default the internal PANDASeq flags and values `-l 1` and `-d rbfkms`. These can be changed using the flag `-e`.
 
+If the flag `-h` is used, the help message will be printed in the terminal and no further action will be performed.
+
 # What exactly does it do?
 This pipeline takes raw, paired-end, demultiplexed Illumina read files and:
 1. Joins them with [PANDASeq](https://storage.googleapis.com/pandaseq/pandaseq.html).
