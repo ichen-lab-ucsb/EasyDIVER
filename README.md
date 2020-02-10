@@ -57,11 +57,11 @@ To install EasyDIVER, execute from the local directory where it's stored (the fi
 The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -h -a -r -T -e]`). 
 
 # Input requirements
-All input files must:
-1. Be in *one* directory (even reads from separate lanes).
-2. Be in FASTQ format.
-3. Use the standard Illumina naming scheme: `sample-name_S#_L00#_R#_001.fastq`
-4. User either the `.fastq` or `.fastq.gz` extensions.
+All input files must be:
+1. Located in *the same* directory (even reads from separate lanes).
+2. In FASTQ format.
+3. Named using the standard Illumina naming scheme: `sample-name_S#_L00#_R#_001.fastq`
+4. In either `.fastq` or `.fastq.gz` extensions.
 
 If any of these requirements are not met, the script will not perform as intended, or more likely, outright fail.
  
@@ -71,13 +71,14 @@ For each sample, the pipeline combines the reads from every lane, and redirects 
 `fastqs` will contain the joined fastq files  
 `fastas` will contain the joined fasta files  
 `counts` will contain all counts files for every sample  
+`counts.aa` will contain peptide count files for every sample (if translation is required)
 `histos` will contain the nt length distributions  
 
-If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and the resulting sequences are dereplicated. Count files and length distributions are created for the amino acid sequences as well. 
+If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and the resulting sequences are dereplicated. Count files and length distributions are created for the amino acid sequences as well. All sequence length distributions are redirected to the directory `histos`.
 
 By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `individual.lanes`.
 
-For the record, and to monitor the sucess of the run, a single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
+For the record, and to monitor the success of the run, a single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
 
  
 # Test dataset
