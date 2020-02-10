@@ -5,7 +5,7 @@
 This is the README document for the EasyDIVERS pipeline for pre-processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
 # Usage
-`bash easydiver.sh -i [-o -p -q -r -T -h -a -e]`
+`easydiver -i [-o -p -q -r -T -h -a -e]`
 
 where:
 
@@ -44,7 +44,12 @@ In order for the pipeline to be called from any directory and for the pipeline t
 
 `cp /path/to/pipeline.sh /path/to/translator.py /usr/local/bin/` 
 
-The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. 
+To install EasyDIVER, execute from the local directory where it's stored (the first command makes it executable, the second comman installs EasyDIVER):
+
+`chmod +x easydiver.sh`
+`sudo install easydiver.sh`
+
+The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. bash easydiver -i [-o -p -q -r -T -h -a -e]). 
 
 # Input requirements
 All input files must:
