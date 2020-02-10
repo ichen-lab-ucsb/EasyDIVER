@@ -22,14 +22,16 @@ where:
      -e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
      -h prints this friendly message
 
-The flag `-e` allows the use of additional PANDASeq internal flags (e.g. L -50). Unless otherwise specified, the pipeline uses by default the internal PANDASeq flags and values `-l 1` and `-d rbfkms`. These can be changed using the flag `-e`.
+At least one extraction primer (either forward or reverse) must be provided.
+
+The flag `-e` allows the use of additional [PANDASeq internal flags](https://storage.googleapis.com/pandaseq/pandaseq.html) (e.g. L -50). Unless otherwise specified, the pipeline uses by default the internal PANDASeq flags and values `-l 1` and `-d rbfkms`. These can be changed using the flag `-e`.
 
 If the flag `-h` is used, the help message will be printed in the terminal and no further action will be performed.
 
 # What exactly does it do?
 This pipeline takes raw, paired-end, demultiplexed Illumina read files and:
-1. Joins them with [PANDASeq](https://storage.googleapis.com/pandaseq/pandaseq.html).
-2. Extracts the insert sequence based on (optionally) user-supplied primer sequences.
+1. Joins them with [PANDASeq](https://github.com/neufeld/pandaseq).
+2. Extracts the insert sequence based on user-supplied primer sequences.
 3. Optionally translates into amino acids.
 4. Generates counts files.
 5. Collects sequence length distributions (histos).
@@ -71,7 +73,7 @@ For each sample, the pipeline combines the reads from every lane, and redirects 
 `counts` will contain all counts files for every sample  
 `histos` will contain the nt length distributions  
 
-If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and count files and length distributions are created for the amino acid sequences as well. 
+If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and the resulting sequences are dereplicated. Count files and length distributions are created for the amino acid sequences as well. 
 
 By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `individual.lanes`.
 
