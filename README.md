@@ -38,4 +38,7 @@ Please report any bugs to Celia Blanco (blanco@ucsb.edu) or Sam Verbanic (sverba
 
 When reporting bugs, please include the full output (eror messages included) printed in the terminal when running the pipeline. 
 
+# Citation
+
+Celia Blanco, Samuel Verbanic, Burckhard Seelig and Irene A. Chen. EasyDIVER: a pipeline for assembling and counting high throughput sequencing data from in vitro evolution of nucleic acids or peptides. Submitted.
 
