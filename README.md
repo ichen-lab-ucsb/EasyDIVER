@@ -5,7 +5,7 @@
 This is the README document for the EasyDIVERS pipeline for pre-processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
 # Usage
-`easydiver -i [-o -p -q -r -T -h -a -e]`
+`easydiver -i [-o -p -q -h -a -r -T -e]`
 
 where:
 
@@ -16,12 +16,12 @@ where:
      -o output directory filepath
      -p forward primer sequence for extraction
      -q reverse primer sequence for extraction
+     -a translate to amino acids
      -r retain individual lane outputs
      -T # of threads
-     -h prints this friendly message
-     -a translate to amino acids
      -e extra flags for PANDASeq (use quotes, e.g. \"-L 50\")"
- 
+     -h prints this friendly message
+
 The flag `-e` allows the use of additional PANDASeq internal flags (e.g. L -50). Unless otherwise specified, the pipeline uses by default the internal PANDASeq flags and values `-l 1` and `-d rbfkms`. These can be changed using the flag `-e`.
 
 # What exactly does it do?
@@ -50,7 +50,7 @@ To install EasyDIVER, execute from the local directory where it's stored (the fi
 
 `sudo install easydiver.sh`
 
-The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -r -T -h -a -e]`). 
+The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -h -a -r -T -e]`). 
 
 # Input requirements
 All input files must:
@@ -69,9 +69,9 @@ For each sample, the pipeline combines the reads from every lane, and redirects 
 `counts` will contain all counts files for every sample  
 `histos` will contain the nt length distributions  
 
-By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `individual.lanes`.
-
 If translation to amino acids is derided (indicated by the use of the flag `-a`) the counts files are translated using the standard genetic code, and count files and length distributions are created for the amino acid sequences as well. 
+
+By default, the script will suppress outputs from individual lanes. If you wish to retain the individual lane outputs, use the `-r` flag. If the flag `-r` is used, files corresponding to the individual lanes (joined fasta files joined fastq files, text counts files and text histograms) are retained and redirected to the subdirectory called `individual.lanes`.
 
 For the record, and to monitor the sucess of the run, a single log text file with the parameters used and the number of sequences in the fastq and counts files is created at the end of the process.
 
