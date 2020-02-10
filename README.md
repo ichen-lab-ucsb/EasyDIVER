@@ -4,9 +4,6 @@
 # EasyDIVER
 This is the README document for the EasyDIVERS pipeline for pre-processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
-# Usage
-`easydiver -i [-o -p -q -h -a -r -T -e]`
-
 # Dependencies and Installation
 The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a [Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/faq).
 
@@ -26,7 +23,19 @@ To install EasyDIVER, execute from the local directory where it's stored (the fi
 
 The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -h -a -r -T -e]`). 
 
+# Usage
+
+Please consult the EasyDIVER manual. 
+`easydiver -i [-o -p -q -h -a -r -T -e]`
+
 # Test dataset
 
 A test dataset is provided. The test data corresponds to two samples obtained from a real experiment of in vitro evolution of mRNA displayed peptides. 
      
+# Reporting bugs
+
+Please report any bugs to Celia Blanco (blanco@ucsb.edu) or Sam Verbanic (sverbanic@ucsb.edu). 
+
+When reporting bugs, please include the full output (eror messages included) printed in the terminal when running the pipeline. 
+
+
