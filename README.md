@@ -40,5 +40,5 @@ When reporting bugs, please include the full output (eror messages included) pri
 
 # Citation
 
-Celia Blanco, Samuel Verbanic, Burckhard Seelig and Irene A. Chen. EasyDIVER: a pipeline for assembling and counting high throughput sequencing data from in vitro evolution of nucleic acids or peptides. Submitted.
+Celia Blanco<sup>*</sup>, Samuel Verbanic<sup>*</sup>, Burckhard Seelig and Irene A. Chen. EasyDIVER: a pipeline for assembling and counting high throughput sequencing data from in vitro evolution of nucleic acids or peptides. Submitted.
 
