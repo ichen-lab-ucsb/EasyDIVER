@@ -36,7 +36,7 @@ A test dataset is provided. The test data corresponds to two samples obtained fr
 
 Please report any bugs to Celia Blanco (blanco@ucsb.edu) or Sam Verbanic (sverbanic@ucsb.edu). 
 
-When reporting bugs, please include the full output (eror messages included) printed in the terminal when running the pipeline. 
+When reporting bugs, please include the full output printed in the terminal when running the pipeline. 
 
 # Citation
 
