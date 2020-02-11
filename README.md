@@ -25,7 +25,7 @@ The pipeline will not be found unless it is stored in the working directory or i
 
 # Usage
 
-Please consult the EasyDIVER manual. 
+Please consult the EasyDIVER [manual](https://github.com/ichen-lab-ucsb/EasyDIVER/blob/master/MANUAL.pdf). 
 `easydiver -i [-o -p -q -h -a -r -T -e]`
 
 # Test dataset
