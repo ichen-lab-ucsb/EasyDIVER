@@ -34,13 +34,13 @@ def translate_dna_single(dna, frame=1):
         	break
         else:
         	amino_acids = amino_acids + translate_codon(codon)
-    return amino_acids   
+    return amino_acids
 
-#input file name
+ #input file name
 f_name_in= sys.argv[1]    
-
 #output file name
-f_name_out=  f_name_in.split(".")[0] + "_aa_dup.txt"
+
+f_name_out=  f_name_in.split(".")[0] + ".aa.dup.txt"
 f_out=open(f_name_out, 'w') 
 
 #number of lines on file = total number na unique seqs
@@ -64,11 +64,9 @@ with open(f_name_in, 'r') as f_in:
 			linesp = line.split()          #separate line in two parts: seq and abd
 			seq_temp = str(translate_dna_single(linesp[0]))         #seq_temp = translated seq
 			abd_temp = int(linesp[1])         #abd_temp = abundance of translated seq
-			if len(seq_temp) == 0:
-				list.append({'seq': "AAAAA-EMPTYSEQUENCE-AAAAA", 'abd': abd_temp})     #if translated sequences starts with stop codon
-			else:
-				list.append({'seq': seq_temp, 'abd': abd_temp})     #else
-			tot += abd_temp
+			if len(seq_temp) != 0:
+				list.append({'seq': seq_temp, 'abd': abd_temp})
+				tot += abd_temp
 			size +=1
 		
 # count unique aa sequences in file (It will be printed in the terminal and hsould match the one in the counts file)
@@ -76,12 +74,18 @@ for i in range (0, len(list)):
 	unique += 1
 		
 #Print header in the output file
+#print >> f_out, str(head[0].split("=")[0]).ljust(30), "=" , str(unique).rjust(10)
+#print >> f_out, str(head[1].split("=")[0]).ljust(30), "=" , str(tot).rjust(10)
+#print >>f_out, ""
 print(str(head[0].split("=")[0]).ljust(30)+ "=" +str(unique).rjust(10), file=f_out)
 print(str(head[1].split("=")[0]).ljust(30)+ "=" +str(tot).rjust(10), file=f_out)
 print("", file=f_out)
 
+#print ""
+
 #Print lines in file
 for i in range (0, len(list)):
-	print (str(list[i]['seq']).ljust(100) +  str(list[i]['abd']).rjust(20), file=f_out)
+	#print >> f_out,  str(list[i]['seq']).ljust(100),  str(list[i]['abd']).rjust(20)
+	print (str(list[i]['seq']).ljust(100) +  str(list[i]['abd']).rjust(20)  +  str('%.3f' %(100*float(list[i]['abd'])/float(tot))).rjust(20) +str("%"), file=f_out)
 
 f_out.close()
