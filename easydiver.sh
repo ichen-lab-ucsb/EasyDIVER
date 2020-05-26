@@ -64,34 +64,91 @@ a) prot="TRUE";;
 esac
 done
 
+bold=$(tput bold)
+normal=$(tput sgr0)
+
 if [ -z $helpm ];
 	then
 		
-		echo " ______                _____ _______      ________ _____  "
+		echo "${bold} ______                _____ _______      ________ _____  "
  		echo "|  ____|              |  __ \_   _\ \    / /  ____|  __ \ "
  		echo "| |__   ___  ___ _   _| |  | || |  \ \  / /| |__  | |__) |"
  		echo "|  __| / _ \/ __| | | | |  | || |   \ \/ / |  __| |  _  / "
  		echo "| |___| (_| \__ \ |_| | |__| || |_   \  /  | |____| | \ \ "
  		echo "|______\__,_|___/\__, |_____/_____|   \/   |______|_|  \_\ "
  		echo "                  __/ |"
- 		echo "                 |___/ "
+		echo "                 |___/ ${normal}"
 		
 		banner()
 		{
 		  echo "+-------------------------------------------------------------------------------------------------+"
 		  printf "| %-95s |\n" "`date`"
 		  echo "|                                                                                                 |"
-		  printf "|`tput bold` %-95s `tput sgr0`|\n" "$@"
+		  printf "|${bold} %-95s ${normal}|\n" "$@"
 		  echo "+-------------------------------------------------------------------------------------------------+"
 		}
 		banner "Welcome to the pipeline for Easy pre-processing and Dereplication of In Vitro Evolution Reads"
 
 fi
 
-echo ""
-
 # Argument report
 # Check arguments, print, exit if necessary w/ message
+
+if [ -z "$inopt" ] && [ -z "$outopt" ] && [ -z $fwd ] && [ -z $rev] && [ -z $threads ] && [ -z $extra ] && [ -z $prot ] && [ -z $slanes ];
+	then
+		echo ""
+		echo "${bold}NO FLAGS PROVIDED. ENTERING PROMPTED INPUT VERSION${normal}"
+		echo ""
+		echo "${bold}Path to your input directory:${normal}"
+		read inopt
+		echo ""
+		echo "${bold}Path to your output directory (default value /pipeline.output):${normal}"
+		read outopt
+		echo ""
+		echo "${bold}Forward primer sequence for extraction:${normal}"
+		read fwd
+		echo ""
+		echo "${bold}Reverse primer sequence for extraction:${normal}"
+		read rev
+		echo ""
+		echo "${bold}Number of threads desired for computation (default value 1):${normal}"
+		read threads
+		echo ""
+		echo "${bold}Extra flags for PANDAseq (default value “-l 1 -d rbfkms“ ; see manual):${normal}"
+		read extras
+		echo ""
+		echo "${bold}Perform translation into amino acids? (yes / no)${normal}"
+		read prot
+		if [[ $prot == "yes" ]];
+			then
+				echo ""
+			else
+				if [[ $prot == "no" ]];
+					then
+						echo ""
+						unset prot
+					else
+						echo ""
+						unset prot
+				fi
+		fi
+		echo "${bold}Retain output files for individual lanes? (yes / no)${normal}"
+		read slanes
+		if [[ $slanes == "yes" ]];
+			then
+				echo ""
+			else
+				if [[ $slanes == "no" ]];
+					then
+						echo ""
+						unset slanes
+					else
+						echo ""
+						unset slanes
+				fi
+		fi
+		echo ""
+fi
 
 if [ -z "$inopt" ];
         then
@@ -104,7 +161,7 @@ if [ -z "$inopt" ];
 			# define input variable with correct path name
 			cd $inopt
 			fastqs=$(pwd)
-			echo "-----Input directory path: $fastqs"
+			echo "-----Input directory path: $fastqs"	
                 
 fi
 
@@ -112,7 +169,9 @@ if [ -z "$outopt" ];
         then
 			outdir=$fastqs/pipeline.output
 			mkdir $outdir
-		echo "-----No output directory supplied. New output directory is: $outdir"
+			echo "-----No output directory supplied. New output directory is: $outdir"
+			echo "-----Input directory path: $fastqs" > $outdir/log.txt
+			echo "-----Output directory path: $outdir" >> $outdir/log.txt
         else
 			# define output variable with correct path name
 			mkdir $outopt 2>/dev/null
@@ -125,7 +184,8 @@ fi
 
 if [ -z $fwd ];
     then
-		echo "-----WARNING: No forward primer supplied - extraction will be skipped"
+		echo "-----No forward primer supplied. Extraction will be skipped."
+		echo "-----No forward primer supplied." >> $outdir/log.txt
 		pval=""
 	else
 		echo "-----Forward Primer: $fwd"
@@ -135,7 +195,8 @@ fi
 
 if [ -z $rev ];
 	then
-		echo "-----WARNING: No reverse primer supplied - extraction will be skipped"
+		echo "-----No reverse primer supplied. Extraction will be skipped."
+		echo "-----No reverse primer supplied." >> $outdir/log.txt
 		qval=""
 	else
 		echo "-----Reverse Primer: $rev"
@@ -143,44 +204,26 @@ if [ -z $rev ];
 		qval="-q $rev"
 fi
 
-if [ -z $slanes ];
-	then
-		echo "-----Individual lane outputs will be suppressed"
-		echo "-----Individual lane outputs suppressed" >> $outdir/log.txt
-	else
-		echo "-----Individual lane outputs will be retained"
-		echo "-----Individual lane outputs retained" >> $outdir/log.txt
-fi
-
 if [ -z $threads ];
 	then
-		echo "-----# of threads undefined; proceeding with 1 thread, this could take a while..."
-		echo "-----# of threads = 1"  >> $outdir/log.txt
+		echo "-----Number of threads not supplied. Proceeding with 1 thread, this could take a while ..."
+		echo "-----Number of threads = 1"  >> $outdir/log.txt
 
 		threads=1
 	else
-		echo "-----# of threads = $threads"
-		echo "-----# of threads = $threads" >> $outdir/log.txt
-fi
-
-if [ -z $prot ];
-	then
-		echo "-----Translation off"
-		echo "-----Translation off" >> $outdir/log.txt
-	else
-		echo "-----Translation needed"
-		echo "-----Translation needed" >> $outdir/log.txt
+		echo "-----Number of threads = $threads"
+		echo "-----Number of threads = $threads" >> $outdir/log.txt
 fi
 
 if [ -z "$extra" ];
 	then
-		echo "-----No additional PANDASeq flags"
-		echo "-----No additional PANDASeq flags"  >> $outdir/log.txt
+		echo "-----No additional PANDAseq flags supplied."
+		echo "-----No additional PANDAseq flags."  >> $outdir/log.txt
 		extra=""
 
 	else
-		echo "-----Additional PANDASeq flags = $extra"
-		echo "-----Additional PANDASeq flags = $extra" >> $outdir/log.txt
+		echo "-----Additional PANDAseq flags = $extra"
+		echo "-----Additional PANDAseq flags = $extra" >> $outdir/log.txt
 
 fi
 
@@ -203,6 +246,25 @@ if [[ $extra == *"d"* ]]
   		dval=""
   	else
   		dval="-d rbfkms"
+fi
+
+
+if [ -z $prot ];
+	then
+		echo "-----Translation off."
+		echo "-----Translation off." >> $outdir/log.txt
+	else
+		echo "-----Translation needed."
+		echo "-----Translation needed." >> $outdir/log.txt
+fi
+
+if [ -z $slanes ];
+	then
+		echo "-----Individual lane outputs will be suppressed."
+		echo "-----Individual lane outputs suppressed." >> $outdir/log.txt
+	else
+		echo "-----Individual lane outputs will be retained."
+		echo "-----Individual lane outputs retained." >> $outdir/log.txt
 fi
 
 echo ""
@@ -334,7 +396,6 @@ if [ -z $slanes ];
                	echo "Individual lane outputs will be retained"
 fi
 
-
 ########## CREATE HISTO FILE FOR DNA ##########
 
 cd $outdir/counts
@@ -356,7 +417,6 @@ do
 	
 	mv ${file//_counts.txt}'_counts_histo.txt' ../histos/${file//_counts.txt}'_counts_histo.txt'
 	
-
 ########## TRANSLATE DNA INTO PEPTIDES ##########
 
 if [ -z $prot ];
@@ -393,7 +453,6 @@ if [ -z $prot ];
 	# Remove every temp file:
 	rm newfile.txt; rm newfile2.txt; rm newfile3.txt; rm newfile4.txt; rm newfile5.txt
 
-
 ########## CREATE HISTO FILE FOR PEPTIDES ##########
 
 	# Generate peptide length distribution for all lanes combined
@@ -422,7 +481,6 @@ if [ -z $prot ];
 		mv counts/*aa.dup.txt counts.aa/
 		mv counts/*aa_histo.txt histos/
 fi
-
 
 ########## CREATE LOG FILE FOR DNA ##########
 
