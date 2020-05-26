@@ -11,17 +11,15 @@ To use the pipeline, first install the two dependencies: [Python](https://www.py
 
 `conda install pandaseq`
 
-In order for the pipeline to be called from any directory and for the pipeline to call the translator reliably, both scripts must be placed in `/usr/local/bin/` upon download. For example, these files can be placed in that directory with:
+In order for the pipeline to be called from any directory and for the pipeline to call the translator reliably, both scripts must be placed in a directory that is in the user's PATH environment variable upon download. For example, for Unix/Linux users, scripts could be placed in `/usr/local/bin/` upon download. These files can be placed in that directory with the command:
 
 `cp /path/to/pipeline.sh /path/to/translator.py /usr/local/bin/` 
 
-To install EasyDIVER, execute from the local directory where it's stored (the first command makes it executable, the second comman installs EasyDIVER):
+To make EasyDIVER executable, enter the followign command from the local directory where it's stored:
 
 `chmod +x easydiver.sh`
 
-`sudo install easydiver.sh`
-
-The pipeline will not be found unless it is stored in the working directory or in `bin/`. Also, the pipeline will not be able to find the translator if it is not stored in `bin/`. If EasyDIVER is not installed, then the command bash and the full script name (easydiver.sh) must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -h -a -r -T -e]`). 
+The pipeline will not be found unless it is stored in the working directory or in a directory that is in the user's PATH environment (e.g. `bin/`). Also, the pipeline will not be able to find the translator if it is not stored in a directory that is in the user's PATH environment (e.g. `bin/`). If EasyDIVER is not made executable, then the command bash must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -h -a -r -T -e]`). 
 
 # Usage
 
@@ -34,7 +32,7 @@ A test dataset is provided. The test data corresponds to two samples obtained fr
      
 # Reporting bugs
 
-Please report any bugs to Celia Blanco (blanco@ucsb.edu) or Sam Verbanic (sverbanic@ucsb.edu). 
+Please report any bugs to Celia Blanco (celiablanco@ucla.edu) or Sam Verbanic (verbanic@ucla.edu). 
 
 When reporting bugs, please include the full output printed in the terminal when running the pipeline. 
 
