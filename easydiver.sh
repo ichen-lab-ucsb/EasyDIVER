@@ -427,7 +427,8 @@ if [ -z $prot ];
 	
 	# Translat into aa
 	echo "Translating ${file//_counts.txt} DNA to peptides..."
-	python /usr/local/bin/translator.py $file 
+	echo $pwd
+	python ../../../translator.py $file 
 	
 	# Print in new file every line except the first 3 (2 with the number of molecules and sequences and town empty lines):
 	tail -n +4 ${file//_counts.txt}'_counts.aa.dup.txt' | sort > newfile.txt;
@@ -452,6 +453,7 @@ if [ -z $prot ];
 	
 	# Remove every temp file:
 	rm newfile.txt; rm newfile2.txt; rm newfile3.txt; rm newfile4.txt; rm newfile5.txt
+	rm ${file//_counts.txt}'_counts.aa.dup.txt'
 
 ########## CREATE HISTO FILE FOR PEPTIDES ##########
 
