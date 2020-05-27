@@ -15,7 +15,7 @@ In order for the pipeline to be called from any directory and for the pipeline t
 
 `cp /path/to/pipeline.sh /path/to/translator.py /usr/local/bin/` 
 
-To make EasyDIVER executable, enter the followign command from the local directory where it's stored:
+We recommend making EasyDIVER executable, by entering the following command from the local directory where it's stored:
 
 `chmod +x easydiver.sh`
 
