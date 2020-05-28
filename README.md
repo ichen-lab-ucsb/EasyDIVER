@@ -9,6 +9,18 @@ This is the README document for the EasyDIVERS pipeline for pre-processing HTS r
 Please consult the EasyDIVER [manual](https://github.com/ichen-lab-ucsb/EasyDIVER/blob/master/MANUAL.pdf). 
 `easydiver -i [-o -p -q -T -a -r -e -h]`
 
+| Flag | Description                                 | Comments                                                                                                |
+|------|---------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| -i   | Input   directory path and name             | Required                                                                                                |
+| -o   | Output   directory path and name            | Optional       Default   value: /pipeline.output                                                        |
+| -p   | Extraction   forward DNA primer             | Optional                                                                                                |
+| -q   | Extraction   reverse DNA primer             | Optional                                                                                                |
+| -T   | Number   of threads used for computation    | Optional    Default   value: 1                                                                          |
+| -a   | Translation   into amino acids is performed | Optional    Default   value: FALSE                                                                      |
+| -r   | Files   for individual lanes are retained   | Optional    Default   value: FALSE                                                                      |
+| -e   | Additional   internal PANDAseq flags        | Optional    Must   be entered in quotation marks (e.g. -e “-L 50”)    Default   value: “-l 1 -d rbfkms“ |
+| -h   | Help   message                              | Optional                                                                                                |
+
 # Dependencies
 The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a [Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/faq).
 
