@@ -30,10 +30,11 @@ The pipeline will not be found unless it is stored in the working directory or i
 # INPUT
 
 All input files must be:
-     1.	Located in the same directory (even reads from separate lanes).
-	2.	In FASTQ format
-	3.	Named using the standard Illumina naming scheme: sample-name_S#_L00#_R#_001.fastq
-	4.	In either .fastq or .fastq.gz extensions.
+    
+1. Located in the same directory (even reads from separate lanes).
+2. In FASTQ format
+3. Named using the standard Illumina naming scheme: sample-name_S#_L00#_R#_001.fastq
+4. In either .fastq or .fastq.gz extensions.
 
 # Test dataset
 
