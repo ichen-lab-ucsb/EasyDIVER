@@ -4,7 +4,12 @@
 # EasyDIVER
 This is the README document for the EasyDIVERS pipeline for pre-processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
 
-# Dependencies and Installation
+# Usage
+
+Please consult the EasyDIVER [manual](https://github.com/ichen-lab-ucsb/EasyDIVER/blob/master/MANUAL.pdf). 
+`easydiver -i [-o -p -q -T -a -r -e -h]`
+
+# Dependencies
 The pipeline script was written to run on Unix-based systems, like Linux, Ubuntu, and MacOS. Windows 10 also has a [Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/faq).
 
 To use the pipeline, first install the two dependencies: [Python](https://www.python.org/downloads/) and [PANDASeq](https://github.com/neufeld/pandaseq/wiki/Installation). We recommend using the Anaconda distribution of python, and adding the Bioconda channel to Anaconda's package manager, conda. See the [Anaconda documentation](https://docs.anaconda.com/anaconda/install/) for installation. After installing Anaconda with [Bioconda](https://bioconda.github.io/), PANDASeq is easily installed using conda with:
@@ -22,10 +27,13 @@ EasyDIVER and the translation tool must be made executable. This can be done by 
 
 The pipeline will not be found unless it is stored in the working directory or in a directory that is in the user's PATH environment (e.g. `bin/`). Also, the pipeline will not be able to find the translator if it is not stored in a directory that is in the user's PATH environment (e.g. `bin/`). 
 
-# Usage
+# INPUT
 
-Please consult the EasyDIVER [manual](https://github.com/ichen-lab-ucsb/EasyDIVER/blob/master/MANUAL.pdf). 
-`easydiver -i [-o -p -q -T -a -r -e -h]`
+All input files must be:
+     1.	Located in the same directory (even reads from separate lanes).
+	2.	In FASTQ format
+	3.	Named using the standard Illumina naming scheme: sample-name_S#_L00#_R#_001.fastq
+	4.	In either .fastq or .fastq.gz extensions.
 
 # Test dataset
 
