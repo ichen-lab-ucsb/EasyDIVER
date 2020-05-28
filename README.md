@@ -15,11 +15,12 @@ In order for the pipeline to be called from any directory and for the pipeline t
 
 `cp /path/to/pipeline.sh /path/to/translator.py /usr/local/bin/` 
 
-We recommend making EasyDIVER executable, by entering the following command from the local directory where it's stored:
+EasyDIVER and the translation tool must be made executable. This can be done by entering the following commands from the local directory where they are stored:
 
 `chmod +x easydiver.sh`
+`chmod +x translator.py`
 
-The pipeline will not be found unless it is stored in the working directory or in a directory that is in the user's PATH environment (e.g. `bin/`). Also, the pipeline will not be able to find the translator if it is not stored in a directory that is in the user's PATH environment (e.g. `bin/`). If EasyDIVER is not made executable, then the command bash must be used to run the pipeline (e.g. `bash easydiver.sh -i [-o -p -q -h -a -r -T -e]`). 
+The pipeline will not be found unless it is stored in the working directory or in a directory that is in the user's PATH environment (e.g. `bin/`). Also, the pipeline will not be able to find the translator if it is not stored in a directory that is in the user's PATH environment (e.g. `bin/`). 
 
 # Usage
 
