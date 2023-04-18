@@ -56,9 +56,12 @@ A test dataset is provided. The test data corresponds to two samples obtained fr
      
 # Reporting bugs
 
-Please report any bugs to Celia Blanco (celiablanco@ucla.edu) or Sam Verbanic (verbanic@ucla.edu). 
+Please report any bugs to Celia Blanco (celiablanco@ucla.edu). 
 
 When reporting bugs, please include the full output printed in the terminal when running the pipeline. 
+If a problem is encountered using a newer MacOS, you may try the following:
+1. Install Homebrew (see here: https://brew.sh/)
+2. brew install libtool
 
 # Citation
 
