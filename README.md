@@ -59,9 +59,15 @@ A test dataset is provided. The test data corresponds to two samples obtained fr
 Please report any bugs to Celia Blanco (celiablanco@ucla.edu). 
 
 When reporting bugs, please include the full output printed in the terminal when running the pipeline. 
-If a problem is encountered using a newer MacOS, you may try the following:
+
+If a problem is encountered with newer MacOS versions after installing PANDASeq, you may try the following:
+
 1. Install Homebrew (see here: https://brew.sh/)
-2. brew install libtool
+2. brew install bzip2 pkgconfig libtools
+3. Run the ./autogen.sh build step (see PANDASeq manual)
+
+If an error referencing snprintf occurs, identify the file from the error message, open that file and adjust 'snprintf' to be 'printf' instead. During our test runs, this issue was found in line 528 in the pandaseq package args.c file. 
+Run the ./autogen.sh build step again. At this point, you might get many ‘warnings’ but no errors. 
 
 # Citation
 
