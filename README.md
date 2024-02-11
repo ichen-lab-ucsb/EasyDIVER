@@ -71,7 +71,7 @@ If a problem is encountered with newer MacOS versions after installing PANDASeq,
 3. Run the ./autogen.sh build step (see PANDASeq manual)
 
 If an error referencing snprintf occurs, identify the file from the error message, open that file and adjust 'snprintf' to be 'printf' instead. During our test runs, this issue was found in line 528 in the pandaseq package args.c file. 
-Run the ./autogen.sh build step again. At this point, you might get many ‘warnings’ but no errors. 
+Run the ./autogen.sh build step again. At this point, you might get many ‘warnings’ but you shouldn't get any errors. 
 
 # Citation
 
