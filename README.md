@@ -1,5 +1,9 @@
 ![EasyDIVER Logo](logo.png)
 
+# Update February 2024
+The script has been updated to ensure smooth operation of the translation step. 
+
+Additional notes have been added (see Reporting bugs section below) to solve possible issues during PANDASeq installation in Mac computers with Apple silicon.
 
 # EasyDIVER
 This is the README document for the EasyDIVERS pipeline for pre-processing HTS reads from _in vitro_ selection experiments. The pipeline can be used to process nucleotides or amino acids sequencing data.
