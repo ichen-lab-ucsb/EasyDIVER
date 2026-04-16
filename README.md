@@ -60,7 +60,7 @@ A test dataset is provided. The test data corresponds to two samples obtained fr
      
 # Reporting bugs
 
-Please report any bugs to Celia Blanco (celiablanco@ucla.edu). 
+Please report any bugs to Celia Blanco (celia.blanco@cab.inta-csic.es). 
 
 When reporting bugs, please include the full output printed in the terminal when running the pipeline. 
 
